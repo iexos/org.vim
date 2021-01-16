@@ -18,46 +18,12 @@ endif
 syntax spell toplevel
 
 
-" Bold, underine, italic, etc.
-syntax region orgItalic        matchgroup=orgItalicDelimiter        start="\(^\|[- '"({\]]\)\@<=\/\ze[^ ]" end="^\@!\/\([^\k\/]\|$\)\@=" keepend contains=@Spell
-syntax region orgBold          matchgroup=orgBoldDelimiter          start="\(^\|[- '"({\]]\)\@<=\*\ze[^ ]" end="^\@!\*\([^\k\*]\|$\)\@=" keepend contains=@Spell
-syntax region orgUnderline     matchgroup=orgUnderlineDelimiter     start="\(^\|[- '"({\]]\)\@<=_\ze[^ ]"  end="^\@!_\([^\k_]\|$\)\@="   keepend contains=@Spell
-syntax region orgStrikethrough matchgroup=orgStrikethroughDelimiter start="\(^\|[ '"({\]]\)\@<=+\ze[^ ]"   end="^\@!+\([^\k+]\|$\)\@="   keepend contains=@Spell
-
-if org#option('org_use_italics', 1)
-    highlight def orgItalic term=italic cterm=italic gui=italic
-else
-    highlight def orgItalic term=none cterm=none gui=none
-endif
-
-highlight def orgBold term=bold cterm=bold gui=bold
-highlight def orgUnderline term=underline cterm=underline gui=underline
-highlight def orgStrikethrough term=strikethrough cterm=strikethrough gui=strikethrough
-highlight def link orgBoldDelimiter orgBold
-highlight def link orgUnderlineDelimiter orgUnderline
-highlight def link orgStrikethroughDelimiter orgStrikethrough
-
-
 " Options
 syntax match  orgOption /^\s*#+\w\+.*$/ keepend
 syntax region orgTitle matchgroup=orgOption start="\c^\s*#+TITLE:\s*" end="$" keepend oneline
 highlight def link orgBlockDelimiter SpecialComment
 highlight def link orgOption SpecialComment
 highlight def link orgTitle Title
-
-
-" Code and vervatim text
-syntax region orgCode     matchgroup=orgCodeDelimiter     start="\(^\|[- '"({\]]\)\@<=\~\ze[^ ]" end="^\@!\~\([^\k\~]\|$\)\@=" keepend
-syntax region orgVerbatim matchgroup=orgVerbatimDelimiter start="\(^\|[- '"({\]]\)\@<==\ze[^ ]"  end="^\@!=\([^\k=]\|$\)\@="   keepend
-syntax match  orgVerbatim /^\s*: .*$/ keepend
-syntax region orgVerbatim matchgroup=orgBlockDelimiter start="\c^\s*#+BEGIN_.*"      end="\c^\s*#+END_.*"      keepend
-syntax region orgCode     matchgroup=orgBlockDelimiter start="\c^\s*#+BEGIN_SRC"     end="\c^\s*#+END_SRC"     keepend
-syntax region orgCode     matchgroup=orgBlockDelimiter start="\c^\s*#+BEGIN_EXAMPLE" end="\c^\s*#+END_EXAMPLE" keepend
-
-highlight def link orgVerbatim Identifier
-highlight def link orgVerbatimDelimiter orgVerbatim
-highlight def link orgCode Statement
-highlight def link orgCodeDelimiter orgCode
 
 
 " Comments
